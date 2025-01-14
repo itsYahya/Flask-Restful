@@ -1,0 +1,225 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Message API",
+        "description": "An API for managing messages. You can create, retrieve, update, and delete messages."
+    },
+    "host": "127.0.0.1:5000",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/api/messages/": {
+            "get": {
+                "summary": "Get all messages",
+                "description": "Retrieve a list of all messages.",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "A list of messages",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Message"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add a new message",
+                "description": "Create a new message.",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The message details.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MessageInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Message created successfully",
+                        "schema": {
+                            "$ref": "#/definitions/Message"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/messages/{id}": {
+            "get": {
+                "summary": "Get a message by ID",
+                "description": "Retrieve a single message by its unique ID.",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the message to retrieve.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The requested message",
+                        "schema": {
+                            "$ref": "#/definitions/Message"
+                        }
+                    },
+                    "404": {
+                        "description": "Message not found"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update a message",
+                "description": "Update specific fields of an existing message.",
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the message to update.",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The fields to update.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MessageUpdate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Message updated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/Message"
+                        }
+                    },
+                    "404": {
+                        "description": "Message not found"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a message",
+                "description": "Delete a message by its unique ID.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the message to delete.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Message deleted successfully"
+                    },
+                    "404": {
+                        "description": "Message not found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Message": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "uri": {
+                    "type": "string",
+                    "example": "/api/messages/1"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Hello, world!"
+                },
+                "duration": {
+                    "type": "integer",
+                    "example": 30
+                },
+                "creation_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2025-01-09T09:30:00Z"
+                },
+                "message_category": {
+                    "type": "string",
+                    "example": "info"
+                },
+                "printed_times": {
+                    "type": "integer",
+                    "example": 5
+                },
+                "printed_once": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "MessageInput": {
+            "type": "object",
+            "required": ["message", "duration", "message_category"],
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example": "Hello, world!"
+                },
+                "duration": {
+                    "type": "integer",
+                    "example": 30
+                },
+                "message_category": {
+                    "type": "string",
+                    "example": "info"
+                }
+            }
+        },
+        "MessageUpdate": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example": "Updated message"
+                },
+                "duration": {
+                    "type": "integer",
+                    "example": 60
+                },
+                "printed_times": {
+                    "type": "integer",
+                    "example": 10
+                },
+                "printed_once": {
+                    "type": "boolean",
+                    "example": false
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Messages",
+            "description": "Operations related to managing messages"
+        }
+    ]
+}
