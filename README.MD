@@ -19,3 +19,5 @@ Follow the steps to run:
 Visite swagger page:
 
     http://localhost:5000/swagger/
+
+I guess i dont need to tell you that Docker is needed.
