@@ -3,7 +3,7 @@ services:
   debian:
     image: debian
     build: ./debian
-    container_name: v_machine
+    container_name: flask
     ports:
       - "5000:5000"
     volumes:
