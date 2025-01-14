@@ -1,0 +1,11 @@
+
+services:
+  debian:
+    image: debian
+    build: ./debian
+    container_name: v_machine
+    ports:
+      - "5000:5000"
+    volumes:
+      - "./data:/data"
+
