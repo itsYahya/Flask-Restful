@@ -21,3 +21,19 @@ Visite swagger page:
     http://localhost:5000/swagger/
 
 I guess i dont need to tell you that Docker is needed.
+
+## RUN IT LOCALY
+
+To run the webservice localy:
+
+    change your working directory to be next to the api folder
+
+    create the venv, and start it
+
+    then install the those packages : flask-restful flask-swagger-ui
+
+    pip install flask-restful flask-swagger-ui
+
+    start the webservice
+
+    now you can visit swagger 
